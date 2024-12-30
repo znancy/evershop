@@ -32,10 +32,10 @@ jobs:
         uses: actions/setup-node@v2
         with:
           node-version: ${{ matrix.node }}
-      - run: ls -R ./dist
       - run: npm install -g npm@9
       - run: npm install
       - run: npm run test
+      - run: ls -R ./
 
       - uses: actions/upload-artifact@v4
         with:
@@ -43,6 +43,7 @@ jobs:
           path: ./dist
 
   docker:
+    needs: build
     runs-on: ubuntu-latest
 
     steps:
